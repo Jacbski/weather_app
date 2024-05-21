@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Map from './components/Map';
 import './App.css';
@@ -6,42 +6,48 @@ import './App.css';
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState('');
-  const [coordinates, setCoordinates] = useState([54.372158, 18.638306]); 
+  const [coordinates, setCoordinates] = useState([54.372158, 18.638306]);
+  const [mainWeather, setMainWeather] = useState('');
+  const [description, setDescription] = useState('');
+  const [temperature, setTemperature] = useState('');
+  const [feelsLike, setFeelsLike] = useState('');
+  const [pressure, setPressure] = useState('');
+  const [windSpeed, setWindSpeed] = useState('');
+  const [cloudiness, setCloudiness] = useState('');
   const [fetchingWeather, setFetchingWeather] = useState(false);
-  const name = weatherData?.name || '';
-  const mainWeather = weatherData?.weather[0]?.main || '';
-  const description = weatherData?.weather[0]?.description || '';
-  const temperature = weatherData?.main?.temp || '';
-  const feelsLike = weatherData?.main?.feels_like || '';
-  const pressure = weatherData?.main?.pressure || '';
-  const windSpeed = weatherData?.wind?.speed || '';
-  const cloudiness = weatherData?.clouds?.all || '';
-  const country = weatherData?.sys?.country || '';
-  const lat = weatherData?.coord?.lat || '';
-  const lon = weatherData?.coord?.lon || '';
 
-  const fetchWeatherData = async () => {
+  const fetchWeatherData = async (cityName) => {
     try {
-      const response = await axios.get(`http://localhost:5000/weather?city=${city}`);
+      const response = await axios.get(`http://localhost:5000/weather?city=${cityName}`);
       setWeatherData(response.data);
       const { coord } = response.data;
       setCoordinates([coord.lat, coord.lon]);
+      setMainWeather(response.data.weather[0].main);
+      setDescription(response.data.weather[0].description);
+      setTemperature(response.data.main.temp);
+      setFeelsLike(response.data.main.feels_like);
+      setPressure(response.data.main.pressure);
+      setWindSpeed(response.data.wind.speed);
+      setCloudiness(response.data.clouds.all);
     } catch (error) {
       console.error('Error fetching weather data:', error.message);
     } finally {
       setFetchingWeather(false);
+      setCity('');
     }
   };
 
   const handleGetWeather = () => {
     if (city && !fetchingWeather) {
       setFetchingWeather(true);
-      fetchWeatherData();
+      fetchWeatherData(city);
     }
   };
 
- 
-    
+  useEffect(() => {
+    fetchWeatherData('Gdansk');
+  }, []);
+
   return (
     <div>
       <input
@@ -51,31 +57,16 @@ function App() {
         placeholder="Enter city name"
       />
       <button onClick={handleGetWeather}>Get Weather</button>
-      {/* {weatherData && (
-        <div>
-          <h2>{weatherData.name}</h2>
-          <p>Main Weather: {weatherData.weather[0].main}</p>
-          <p>Description: {weatherData.weather[0].description}</p>
-          <p>Temperature: {weatherData.main.temp}°C</p>
-          <p>Feels Like: {weatherData.main.feels_like}°C</p>
-          <p>Pressure: {weatherData.main.pressure} hPa</p>
-          <p>Wind Speed: {weatherData.wind.speed} m/s</p>
-          <p>Cloudiness: {weatherData.clouds.all}%</p>
-          <p>Country: {weatherData.sys.country}</p>
-          <p>Lat: {weatherData.coord.lat}</p>
-          <p>Lon: {weatherData.coord.lon}</p>
-        </div>
-      )} */}
-      <Map 
-        coordinates={coordinates} 
-        city={name} 
+      <Map
+        coordinates={coordinates}
+        city={weatherData ? weatherData.name : ''}
         mainWeather={mainWeather}
-        description={description} 
-        temperature={temperature} 
+        description={description}
+        temperature={temperature}
         feelsLike={feelsLike}
-        pressure={pressure} 
-        windSpeed={windSpeed} 
-        cloudiness={cloudiness} 
+        pressure={pressure}
+        windSpeed={windSpeed}
+        cloudiness={cloudiness}
       />
     </div>
   );

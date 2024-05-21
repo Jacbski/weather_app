@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import Marker from './Marker';
+
 
 
 
 function Map({ coordinates,city,mainWeather, description,temperature,feelsLike,pressure,windSpeed,cloudiness}) {
   useEffect(() => {
-    if (coordinates) {
+    
       const mapInstance = L.map('map').setView(coordinates, 10);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapInstance);
+      if (coordinates) {
       const popupContent = `
         <div>
           <h2>${city}</h2>
