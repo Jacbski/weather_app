@@ -15,6 +15,7 @@ function App() {
   const [windSpeed, setWindSpeed] = useState('');
   const [cloudiness, setCloudiness] = useState('');
   const [fetchingWeather, setFetchingWeather] = useState(false);
+  const [cities, setCities] = useState([]);
 
   const fetchWeatherData = async (cityName) => {
     try {
@@ -33,7 +34,7 @@ function App() {
       console.error('Error fetching weather data:', error.message);
     } finally {
       setFetchingWeather(false);
-      setCity('');
+      setCity(''); // Reset input field
     }
   };
 
@@ -46,6 +47,22 @@ function App() {
 
   useEffect(() => {
     fetchWeatherData('Gdansk');
+  }, []);
+
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const response = await get('./city/city.list.json');
+        if (Array.isArray(response.data)) {
+          setCities(response.data);
+        } else {
+          console.error('Cities data is not an array');
+        }
+      } catch (error) {
+        console.error('Error fetching cities:', error.message);
+      }
+    };
+    fetchCities();
   }, []);
 
   return (
@@ -67,6 +84,7 @@ function App() {
         pressure={pressure}
         windSpeed={windSpeed}
         cloudiness={cloudiness}
+        cities={cities}
       />
     </div>
   );

@@ -1,0 +1,29 @@
+.rectangle-marker {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rectangle-marker_temp {
+    font-family: "Space Grotesk", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 100%;
+    padding: 4pt;
+    min-width: 24px;
+    background: #48484a;
+    border-bottom-left-radius: 2pt;
+    border-top-left-radius: 2pt;
+    color: white;
+  }
+  
+  .rectangle-marker_city {
+    font-family: "Space Grotesk", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 100%;
+    padding: 4pt;
+    background: #412;
+    border-bottom-right-radius: 4pt;
+    border-top-right-radius: 4pt;
+    color: white;
+    white-space: nowrap;
+  }
+  
