@@ -34,7 +34,7 @@ function App() {
       console.error('Error fetching weather data:', error.message);
     } finally {
       setFetchingWeather(false);
-      setCity(''); // Reset input field
+      setCity(''); 
     }
   };
 
@@ -49,21 +49,21 @@ function App() {
     fetchWeatherData('Gdansk');
   }, []);
 
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const response = await get('./city/city.list.json');
-        if (Array.isArray(response.data)) {
-          setCities(response.data);
-        } else {
-          console.error('Cities data is not an array');
-        }
-      } catch (error) {
-        console.error('Error fetching cities:', error.message);
-      }
-    };
-    fetchCities();
-  }, []);
+  // useEffect(() => {
+  //   const fetchCities = async () => {
+  //     try {
+  //       const response = await get('./city/city.list.json');
+  //       if (Array.isArray(response.data)) {
+  //         setCities(response.data);
+  //       } else {
+  //         console.error('Cities data is not an array');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching cities:', error.message);
+  //     }
+  //   };
+  //   fetchCities();
+  // }, []);
 
   return (
     <div>
