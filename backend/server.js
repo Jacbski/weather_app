@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const app = express();
 const port = 5000;
-const apiKey = process.env.WEATHER_API_KEY; 
+const apiKey = ''; 
 
 app.use(cors());
 
