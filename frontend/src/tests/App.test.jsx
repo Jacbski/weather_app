@@ -42,10 +42,8 @@ test('handles user input and fetches new weather data', async () => {
 test('renders a marker with correct HTML structure', async () => {
   render(<App />);
 
-  // Wait for the initial data to load
   await waitFor(() => screen.getByText(/Main Weather:/i));
 
-  // Mock the Leaflet map and markers
   const map = L.map('map').setView([54.372158, 18.638306], 10);
   const marker = L.marker([54.372158, 18.638306], {
     icon: L.divIcon({
@@ -57,7 +55,6 @@ test('renders a marker with correct HTML structure', async () => {
     }),
   }).addTo(map);
 
-  // Verify the marker's HTML structure
   const markerHtml = marker.getElement().innerHTML;
   expect(markerHtml).toContain('<div class="rectangle-marker_temp">20°C</div>');
   expect(markerHtml).toContain('<div class="rectangle-marker_city">Gdansk</div>');
