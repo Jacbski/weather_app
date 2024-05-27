@@ -22,3 +22,5 @@ rad.json
 node_modules 
 #Test results file
 TestResults.xml
+
+vercel.json
