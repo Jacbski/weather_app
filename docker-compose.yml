@@ -1,22 +1,17 @@
 version: '3'
-
 services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    volumes:
-      - ./backend:/app
-    command: ["node", "server.js"]
+    env_file:
+      - ./backend/.env
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-    command: ["npm", "run", "dev"]
+      - '3000:3000'
+    depends_on:
+      - backend

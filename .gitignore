@@ -19,6 +19,8 @@ rad.json
 #License-file
 *.flf
 
+.env
+
 node_modules 
 #Test results file
 TestResults.xml
