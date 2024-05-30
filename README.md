@@ -15,7 +15,7 @@ Backend jest odpowiedzialny za komunikację z API OpenWeather w celu pobrania da
 
 ## Frontend
 
-Frontend pozwala użytkownikowi na wprowadzenie nazwy miasta i wysłanie zapytania do backendu w celu uzyskania aktualnych danych pogodowych. Po otrzymaniu odpowiedzi od backendu, frontend wyświetla informacje o pogodzie oraz generuje interaktywną mapę, na której można zobaczyć położenie zaznaczonych miast za pomocą markerów.
+Frontend umożliwia użytkownikom wprowadzenie nazwy miasta i wysłanie żądania do backendu w celu uzyskania aktualnych danych pogodowych. Po otrzymaniu odpowiedzi od backendu, frontend wyświetla informacje o pogodzie i generuje interaktywną mapę za pomocą Leaflet, gdzie użytkownicy mogą zobaczyć położenie zaznaczonych miast za pomocą markerów.
 
 
 ## Uruchomienie za pomocą Dockera
@@ -57,8 +57,7 @@ The application consists of two main parts: the backend and the frontend.
 The backend is responsible for communicating with the OpenWeather API to retrieve weather data for a specified city. It is implemented in Node.js, using the Express.js framework. The backend receives requests sent by the frontend, forwards them to the OpenWeather API, and returns the response.
 
 ## Frontend
-The frontend allows users to enter the name of a city and send a request to the backend to obtain current weather data. Upon receiving a response from the backend, the frontend displays weather information and generates an interactive map where users can see the location of marked cities using markers.
-
+The frontend allows users to enter the name of a city and send a request to the backend to obtain current weather data. Upon receiving a response from the backend, the frontend displays weather information and generates an interactive map using Leaflet, where users can see the location of marked cities using markers.
 ## Running with Docker
 To run the application using Docker, follow these steps:
 
