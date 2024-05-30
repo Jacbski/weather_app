@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Map from './components/Map';
-import './App.css';
+import './css/App.scss';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -48,7 +48,7 @@ function App() {
   useEffect(() => {
     fetchWeatherData('Gdansk');
   }, []);
-
+  // TODO DOROBIC ABY WYSWEITLALO SIE WIECEJ MIAST(PROBLEM Z ILOSCIA WYSWIETLANIA ILSOCI MIAST, OGRANICZENIE ZAPYTAN W API)
   // useEffect(() => {
   //   const fetchCities = async () => {
   //     try {
@@ -66,26 +66,29 @@ function App() {
   // }, []);
 
   return (
-    <div>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city name"
-      />
-      <button onClick={handleGetWeather}>Get Weather</button>
-      <Map
-        coordinates={coordinates}
-        city={weatherData ? weatherData.name : ''}
-        mainWeather={mainWeather}
-        description={description}
-        temperature={temperature}
-        feelsLike={feelsLike}
-        pressure={pressure}
-        windSpeed={windSpeed}
-        cloudiness={cloudiness}
-        cities={cities}
-      />
+    <div className='app-container'>
+      <div className='search-container'>
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Enter city name"
+
+        />
+        <button onClick={handleGetWeather}>Get Weather</button>
+        </div>
+        <Map
+          coordinates={coordinates}
+          city={weatherData ? weatherData.name : ''}
+          mainWeather={mainWeather}
+          description={description}
+          temperature={temperature}
+          feelsLike={feelsLike}
+          pressure={pressure}
+          windSpeed={windSpeed}
+          cloudiness={cloudiness}
+          cities={cities}
+        />
     </div>
   );
 }
