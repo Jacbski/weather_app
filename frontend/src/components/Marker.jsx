@@ -1,29 +1,41 @@
 import React from 'react';
 import L from 'leaflet';
-import '../css/Marker.scss';  
 
-const hotWeather = (city, temperature) => {
-  const RectangleIcon = L.divIcon({
-    className: 'rectangle-marker',
-    html: `
-      <div class="rectangle-marker_temp_hot">${temperature}°C</div>
-      <div class="rectangle-marker_city_hot">${city}</div>
-    `,
-  });
+function Marker({ position, mainWeather }) {
+  let markerIcon;
 
-  return RectangleIcon;
-};
+  // Ustaw odpowiedni styl dla markera w zależności od głównej pogody
+  switch (mainWeather) {
+    case 'Clear':
+      markerIcon = L.icon({
+        iconUrl: '1.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [0, -41]
+      });
+      break;
+    case 'Clouds':
+      markerIcon = L.icon({
+        iconUrl: 'frontend\src\icons\registration_plate.svg',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [0, -41]
+      });
+      break;
+    // Dodaj inne przypadki w zależności od potrzeb
+    default:
+      markerIcon = L.icon({
+        iconUrl: 'frontend\src\icons\registration_plate.svg',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [0, -41]
+      });
+  }
 
-const coldWeather = (city, temperature) => {
-  const RectangleIcon = L.divIcon({
-    className: 'rectangle-marker',
-    html: `
-      <div class="rectangle-marker_temp_cold">${temperature}°C</div>
-      <div class="rectangle-marker_city_cold">${city}</div>
-    `,
-  });
+  // Utwórz marker z odpowiednim stylem
+  const markerInstance = L.marker(position, { icon: markerIcon }).addTo(mapInstance);
 
-  return RectangleIcon;
-};
+  return null;
+}
 
-export { hotWeather, coldWeather };
+export default Marker;
