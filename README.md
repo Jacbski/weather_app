@@ -1,3 +1,4 @@
+![Poland](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/pl.png "Poland")
 # Aplikacja Pogodowa
 
 Aplikacja Pogodowa to prosta platforma służąca do sprawdzania aktualnej pogody w wybranych miejscach. Cała aplikacja opiera się na API dostarczanym przez OpenWeather, z którego pobierane są dane o pogodzie.
@@ -42,6 +43,8 @@ Po wykonaniu tych kroków aplikacja zostanie uruchomiona lokalnie na Twoim kompu
 
 
 
+
+![United Kingdom](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/gb.png "United Kingdom")
 # Weather Application
 
 The Weather Application is a simple platform for checking the current weather in selected locations. The entire application relies on the API provided by OpenWeather, from which weather data is retrieved.
@@ -73,3 +76,9 @@ Run the application using Docker Compose:
 docker-compose up --build
 ```
 After completing these steps, the application will be running locally on your computer, and the frontend will be accessible at http://localhost:3000.
+
+
+<img width="1882" alt="image" src="https://github.com/Jacbski/weather_app/assets/124634295/95dc1027-4554-4a17-a4cd-864aa8cda875">
+<img width="977" alt="image" src="https://github.com/Jacbski/weather_app/assets/124634295/e44e6d26-67d4-4e02-bc1a-0a0b2ffb22b2">
+
+
