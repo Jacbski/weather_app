@@ -1,19 +1,9 @@
 import React, { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import './Map.css';  
+import '../css/Map.scss';  
+import {hotWeather,coldWeather} from './Marker';
 
-const createRectangleMarker = (city, temperature) => {
-  const RectangleIcon = L.divIcon({
-    className: 'rectangle-marker',
-    html: `
-      <div class="rectangle-marker_temp">${temperature}°C</div>
-      <div class="rectangle-marker_city">${city}</div>
-    `,
-  });
-
-  return RectangleIcon;
-};
 
 function Map({ coordinates, city, mainWeather, description, temperature, feelsLike, pressure, windSpeed, cloudiness }) {
   useEffect(() => {
@@ -26,17 +16,22 @@ function Map({ coordinates, city, mainWeather, description, temperature, feelsLi
     if (city) {
       const roundedTemperature = Math.round(temperature);
       const popupContent = `
-        <h2>${city}</h2>
-        <p>Main Weather: ${mainWeather}</p>
-        <p>Description: ${description}</p>
-        <p>Temperature: ${roundedTemperature}°C</p>
-        <p>Feels Like: ${feelsLike}°C</p>
-        <p>Pressure: ${pressure} hPa</p>
-        <p>Wind Speed: ${windSpeed} m/s</p>
-        <p>Cloudiness: ${cloudiness}%</p>
+        <div class="popup-content">
+          <h2>${city}</h2>
+          <p>Main Weather: ${mainWeather}</p>
+          <p>Description: ${description}</p>
+          <p>Temperature: ${roundedTemperature}°C</p>
+          <p>Feels Like: ${feelsLike}°C</p>
+          <p>Pressure: ${pressure} hPa</p>
+          <p>Wind Speed: ${windSpeed} m/s</p>
+          <p>Cloudiness: ${cloudiness}%</p>
+        </div>
       `;
 
-      marker = L.marker(coordinates, { icon: createRectangleMarker(city,roundedTemperature) }).addTo(mapInstance).bindPopup(popupContent);
+
+      const markerIcon = roundedTemperature > 20 ? hotWeather(city, roundedTemperature) : coldWeather(city, roundedTemperature);
+      marker = L.marker(coordinates, { icon: markerIcon }).addTo(mapInstance).bindPopup(popupContent);
+      
     }
 
     return () => {
@@ -47,7 +42,7 @@ function Map({ coordinates, city, mainWeather, description, temperature, feelsLi
     };
   }, [coordinates, city, mainWeather, description, temperature, feelsLike, pressure, windSpeed, cloudiness]);
 
-  return <div id="map" style={{ height: '90vh' }}></div>;
+  return <div id="map" className="map-container"></div>;
 }
 
 export default Map;
